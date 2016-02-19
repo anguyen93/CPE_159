@@ -102,7 +102,6 @@ void KernelMain(TF_t *TF_ptr) {
 		default: 
 			cons_printf("Panic: unknown intr ID (%d)!\n", TF_ptr->intr_id);
 			breakpoint();	// fallback to GDB 
-			break;
 	}
 
 	if(cons_kbhit()){

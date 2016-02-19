@@ -71,9 +71,8 @@ void TimerISR() {
 	}else{
 		//in PCB, upcount both runtime and total_runtime of running process
 
-
-	pcb[running_pid].runtime = pcb[running_pid].runtime+1;
-	pcb[running_pid].total_runtime = pcb[running_pid].total_runtime+1;
+		pcb[running_pid].runtime = pcb[running_pid].runtime+1;
+		pcb[running_pid].total_runtime = pcb[running_pid].total_runtime+1;
 	
 		if(pcb[running_pid].runtime== TIME_LIMIT){ // If runtime has reached TIME_LIMIT
 			// Reset runtime
