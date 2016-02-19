@@ -28,8 +28,7 @@ void StartProcISR(int new_pid) {
 	MyBzero((char *) &proc_stack[new_pid], PROC_STACK_SIZE);
 
 	//Set TF_ptr of PCB close to end (top) of stack, then fill out
-	pcb[new_pid].TF_ptr = (TF_t *) &proc_stack[new_pid][PROC_STACK_SIZE];
-	pcb[new_pid].TF_ptr--;
+	pcb[new_pid].TF_ptr = (TF_t *) &proc_stack[new_pid][PROC_STACK_SIZE - sizeof(TF_t)];
 
 	pcb[new_pid].TF_ptr->eflags = EF_DEFAULT_VALUE|EF_INTR; // set INTR flag
 	pcb[new_pid].TF_ptr->cs = get_cs();			// standard fair
@@ -64,7 +63,7 @@ void EndProcISR() {
 void TimerISR() {
    	//just return if running PID is -1 (not any valid PID)
 	
-	if(running_pid== -1){
+	if(running_pid == -1){
 		cons_printf("PANIC MESSAGE: RUNNING PID = -1\n");
 		return;
 	
@@ -84,6 +83,7 @@ void TimerISR() {
 			pcb[running_pid].state = READY;
 			EnQ(running_pid, &ready_q);
 			running_pid = -1;
+			Scheduler();
 		}	
 	}
 }

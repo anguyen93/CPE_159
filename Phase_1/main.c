@@ -26,7 +26,6 @@ void SetEntry(int entry_num, func_ptr_t func_ptr){
 }
 
 int main() {
-	
 	//Sets kernel data.
 	InitKernelData();
 	
@@ -48,9 +47,9 @@ void InitKernelData() {
    	int i;
 
    	//call MyBzero() to clear queues (which is to be coded in toolfunc.h/.c)
-	MyBzero((char *) &ready_q, MAX_PROC_NUM);
-	MyBzero((char *) &free_q, MAX_PROC_NUM);
-	
+	MyBzero((char *) &ready_q, sizeof(q_t));
+	MyBzero((char *) &free_q, sizeof(q_t));
+
 	// lopp number i from 0 to 19
    	for(i = 0; i < Q_LEN; i++){
       		//call EnQ() to enqueue i to free_q
@@ -123,7 +122,7 @@ void KernelMain(TF_t *TF_ptr) {
 			case 'b':
 				breakpoint(); // Goes to GDB
 				break;
-			case 'x':
+			case 'q':
 				exit(0); // Quits program
 				break;
 			default :

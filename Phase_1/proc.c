@@ -10,7 +10,7 @@ void IdleProc() {
 	for(;;){
 		int i;
 		cons_printf("IdleProc (PID 0) runs.\n");
-   		for(i = 0; i < 1666666; i++){ // IO_DELAY() delays CPU
+   		for(i = 0; i < 1666667; i++){ // IO_DELAY() delays CPU
 			IO_DELAY();	
 		}
 		
@@ -21,7 +21,7 @@ void UserProc() {
 	for(;;){
 		int i;
 		cons_printf("UserProc (PID %d) runs.\n", running_pid);
-		for(i = 0; i < 1666666; i++){ // IO_DELAY() delays CPU
+		for(i = 0; i < 1666667; i++){ // IO_DELAY() delays CPU
 			IO_DELAY();
 		}
 			

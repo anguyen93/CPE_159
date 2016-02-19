@@ -11,8 +11,7 @@ void MyBzero(char *p, int q_len) {
 	int i;
  
 	for(i = 0; i < q_len; i++){
-		p = p + i;
-		*p = 0;
+		*p++ = 0;
 	}
 }
 
@@ -20,12 +19,13 @@ void EnQ(int data, q_t *q_addr) {
 	
 	if(q_addr->len == Q_LEN){ // If q is full, return return message
 		cons_printf("Enqueue is already full\n");
+		return;
 	}
 
 	q_addr-> q[q_addr->tail]= data;
 	q_addr-> tail++;
 	q_addr-> len++;
-
+	
 	if(q_addr->tail == Q_LEN){ // if q's tail is full, then reset tail
 		q_addr->tail = 0;
 	}
